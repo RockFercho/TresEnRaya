@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.model.components;
+package game.model.factory;
 
 /**
  * Class is the box of the board.
