@@ -6,9 +6,13 @@
 package game.model.components;
 
 /**
+ * The class runs every state board.
  *
  * @author rockfercho
  */
 public enum State {
-    
+
+    Free,
+    Circle,
+    Cross
 }
