@@ -13,23 +13,46 @@ import game.model.logic.LogicGame;
 import game.model.logic.SearchAddress;
 
 /**
+ * The class is responsible for handling the board.
  *
  * @author rockfercho
  */
 public class Board {
 
-    private Box board[][];
-    private LogicGame logic;
+    /**
+     * Manages the game board.
+     */
+    private final Box board[][];
+    /**
+     * Instance of the game logic.
+     */
+    private final LogicGame logic;
 
+    /**
+     * Constructor initializes global variables.
+     */
     public Board() {
         this.board = new FactoryBoard().getBoxes();
         this.logic = new LogicGame();
     }
 
+    /**
+     *
+     * Make the moves of a game of person against person.
+     *
+     * @param position
+     * @param state
+     * @return
+     */
     public SearchAddress personVsPerson(Position position, State state) {
         return this.logic.movement(board, position, state);
     }
 
+    /**
+     * Return state the winner.
+     *
+     * @return
+     */
     public State getWiner() {
         return this.logic.getWiner();
     }
