@@ -22,16 +22,16 @@ public class FactoryBoard {
      */
     public FactoryBoard() {
         this.boxes = new Box[3][3];
-        this.CreateBoxes();
+        this.createBoxes();
     }
 
     /**
      * Responsible construction method board boxes.
      */
-    private void CreateBoxes() {
+    private void createBoxes() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                this.boxes[i][j] = new Box(new Position(i, j), State.Free);
+                this.boxes[i][j] = new Box(new Position(i, j), State.FREE);
             }
         }
     }

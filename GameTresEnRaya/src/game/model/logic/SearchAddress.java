@@ -3,16 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.model.factory;
+package game.model.logic;
 
 /**
- * The class runs every state board.
  *
  * @author rockfercho
  */
-public enum State {
+public enum SearchAddress {
 
-    FREE,
-    CIRCLE,
-    CROSS
+    FIRSTLINE,
+    SECONDLINE,
+    THIRDLINE,
+    FIRSTCOLUMN,
+    SECONDCOLUMN,
+    THIRDCOLUMN,
+    MAINDIAGONAL,
+    SECONDARYDIAGONAL,
+    FREE
 }
