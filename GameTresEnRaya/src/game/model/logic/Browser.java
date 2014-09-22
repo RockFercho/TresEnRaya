@@ -6,6 +6,7 @@
 package game.model.logic;
 
 import game.model.factory.Box;
+import game.model.factory.State;
 
 /**
  *
@@ -17,10 +18,11 @@ public class Browser {
      * Returns made ​​where to line three.
      *
      * @param board
+     * @param state the state of the player who put his state at last.
      * @return line result.
      */
-    public SearchAddress searchWinner(Box[][] board) {
-        return this.searchByAddress(board);
+    public SearchAddress searchWinner(Box[][] board, State state) {
+        return this.searchByAddress(board, state);
     }
 
     /**
@@ -29,37 +31,37 @@ public class Browser {
      * @param board
      * @return result search.
      */
-    private SearchAddress searchByAddress(Box[][] board) {
+    private SearchAddress searchByAddress(Box[][] board, State state) {
         SearchAddress result = SearchAddress.FREE;
 
-        if (this.searchByRow(board, 0)) {
+        if (this.searchByRow(board, 0, state)) {
             result = SearchAddress.FIRSTLINE;
         }
 
-        if (this.searchByRow(board, 1)) {
+        if (this.searchByRow(board, 1, state)) {
             result = SearchAddress.SECONDLINE;
         }
-        if (this.searchByRow(board, 2)) {
+        if (this.searchByRow(board, 2, state)) {
             result = SearchAddress.THIRDLINE;
         }
 
-        if (this.searchByColumn(board, 0)) {
+        if (this.searchByColumn(board, 0, state)) {
             result = SearchAddress.FIRSTCOLUMN;
         }
 
-        if (this.searchByColumn(board, 1)) {
+        if (this.searchByColumn(board, 1, state)) {
             result = SearchAddress.SECONDCOLUMN;
         }
 
-        if (this.searchByColumn(board, 2)) {
+        if (this.searchByColumn(board, 2, state)) {
             result = SearchAddress.THIRDCOLUMN;
         }
 
-        if (this.mainDiagonal(board)) {
+        if (this.mainDiagonal(board, state)) {
             result = SearchAddress.MAINDIAGONAL;
         }
 
-        if (this.secundaryDiagonal(board)) {
+        if (this.secundaryDiagonal(board, state)) {
             result = SearchAddress.SECONDARYDIAGONAL;
         }
 
@@ -73,8 +75,10 @@ public class Browser {
      * @param i value row.
      * @return value boolean.
      */
-    private boolean searchByRow(Box[][] board, int i) {
-        return (board[i][0] == board[i][1] && board[i][0] == board[i][2]);
+    private boolean searchByRow(Box[][] board, int i, State state) {
+        return (board[i][0].getState() == state && 
+                board[i][1].getState() == state &&
+                board[i][2].getState() == state);
     }
 
     /**
@@ -84,8 +88,10 @@ public class Browser {
      * @param j number column
      * @return value boolean
      */
-    private boolean searchByColumn(Box[][] board, int j) {
-        return (board[0][j] == board[1][j] && board[0][j] == board[2][j]);
+    private boolean searchByColumn(Box[][] board, int j, State state) {
+        return (board[0][j].getState() == state &&
+                board[1][j].getState() == state &&
+                board[0][j].getState() == state);
     }
 
     /**
@@ -94,8 +100,10 @@ public class Browser {
      * @param board
      * @return
      */
-    private boolean mainDiagonal(Box[][] board) {
-        return (board[0][0] == board[1][1] && board[0][0] == board[2][2]);
+    private boolean mainDiagonal(Box[][] board, State state) {
+        return (board[0][0].getState() == state &&
+                board[1][1].getState() == state &&
+                board[2][2].getState() == state);
     }
 
     /**
@@ -104,7 +112,9 @@ public class Browser {
      * @param board
      * @return value boolean
      */
-    private boolean secundaryDiagonal(Box[][] board) {
-        return (board[2][0] == board[1][1] && board[2][0] == board[0][2]);
+    private boolean secundaryDiagonal(Box[][] board, State state) {
+        return (board[2][0].getState() == state &&
+                board[1][1].getState() == state &&
+                board[0][2].getState() == state);
     }
 }

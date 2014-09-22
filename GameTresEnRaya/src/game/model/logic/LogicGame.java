@@ -5,6 +5,7 @@
  */
 package game.model.logic;
 
+import game.model.computerai.ComputerAi;
 import game.model.factory.Box;
 import game.model.factory.Position;
 import game.model.factory.State;
@@ -15,6 +16,11 @@ import game.model.factory.State;
  */
 public class LogicGame {
 
+    /**
+     * Represents the artificial intelligence for the computer
+     */
+    private final ComputerAi ai;
+    
     /**
      * Declaration browser board.
      */
@@ -30,6 +36,7 @@ public class LogicGame {
     public LogicGame() {
         this.browser = new Browser();
         this.state = State.FREE;
+        this.ai = new ComputerAi(this);
     }
 
     /**
@@ -46,14 +53,22 @@ public class LogicGame {
     }
 
     /**
+     * Returns the artificial intelligence instantiated in the constructor.
+     * @return a CoputerAi value that represents the artificial intelligence for the machine.
+     */
+    public ComputerAi getAi() {
+        return ai;
+    }
+    
+    /**
      * The method aims to find if there is a winner.
      *
      * @param board
      * @param newState
      * @return
      */
-    private SearchAddress searchWinner(Box[][] board, State newState) {
-        SearchAddress result = this.browser.searchWinner(board);
+    public SearchAddress searchWinner(Box[][] board, State newState) {
+        SearchAddress result = this.browser.searchWinner(board, newState);
         if (!result.equals(SearchAddress.FREE)) {
             this.state = newState;
         }
@@ -65,7 +80,7 @@ public class LogicGame {
      *
      * @return value state.
      */
-    public State getWiner() {
+    public State getWinner() {
         return state;
     }
 }

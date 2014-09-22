@@ -49,11 +49,77 @@ public class Board {
     }
 
     /**
+     * Allows the player to play against the machine
+     * @param position the position where the player is going to put his state
+     * @param state the state chosen by the player
+     * @return a searchAddres return type that indicate where is the three in line if it exists
+     *          returns Free if there is no three in line.
+     */
+    public SearchAddress personVsMachine(Position position, State state){
+        this.logic.movement(board, position, state);
+        return this.logic.getAi().movement(this, state);
+    }
+    
+    /**
      * Return state the winner.
      *
      * @return
      */
-    public State getWiner() {
-        return this.logic.getWiner();
+    public State getWinner() {
+        return this.logic.getWinner();
+    }
+    
+    /**
+     * Returns true if the board is completely empty.
+     * @return true if the board is completely empty, false if there is at least one element.
+     */
+    public boolean isEmpty(){
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j].getState() != State.FREE){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Returns a boolean value that indicates if there is one state in the board.
+     * @return true if the player has played its state false if there is none of more than one state.
+     */
+    public boolean PlayerHasPlayedOneTurn() { 
+        int statePlayed = 0;
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++) {
+                if (!(board[i][j].getState() == State.FREE)){
+                    statePlayed++;
+                }
+            }
+        }
+        return statePlayed <= 1;
+    }
+    
+    /**
+     * Returns the current boxes in the board.
+     * @return a Box type result that represents the current boxes in the board.
+     */
+    public Box[][] getBoxes() {
+        return board;
+    }
+    
+    /**
+     * If there are no more empty boxes this method will return a positive value.
+     * @return true if there are no empty boxes, false if there is one or more empty boxes.
+     */
+    public boolean emptyCells() {
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j].getState() == State.FREE){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
