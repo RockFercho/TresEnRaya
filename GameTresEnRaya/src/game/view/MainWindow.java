@@ -50,7 +50,7 @@ public class MainWindow extends JFrame {
     private void setValuesConstraint(int gridX, int gridY,
             GridBagConstraints c) {
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(40, 15, 40, 15);
+        c.insets = new Insets(25, 5, 5, 5);
         c.gridx = gridX + 1;
         c.gridy = gridY + 1;
         c.gridwidth = 1;

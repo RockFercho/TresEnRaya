@@ -8,6 +8,7 @@ package game.view;
 
 import game.model.factory.Position;
 import game.model.factory.State;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -20,8 +21,13 @@ public class Cell extends JButton {
     public State state;
     
     public Cell(int xPosition, int yPosition) {
-        super("       ");
+        super();
         this.position = new Position(xPosition, yPosition);
         this.state = State.FREE;
+        ImageIcon icon = new ImageIcon("resources/Empty.png");
+        this.setIcon(icon);
+        this.setFocusPainted(false);
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
     }
 }
