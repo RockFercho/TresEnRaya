@@ -6,9 +6,10 @@
 
 package game.view;
 
+import game.controller.OnePlayerController;
+import game.controller.TwoPlayersController;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
@@ -23,11 +24,25 @@ import javax.swing.JMenuItem;
  */
 public class MainWindow extends JFrame {
     
+    private static MainWindow main;
+    
     private Cell[][] cells;
     private GamePanel gamePanel;
     private JLabel label;
     
-    public MainWindow() {
+    public static MainWindow getInstance() {
+        if (main == null) {
+            return main = new MainWindow();
+        } else {
+            return main;
+        }
+    }
+    
+    public static void destroyInstance() {
+        main = null;
+    }
+    
+    private MainWindow() {
         super("Tres En Raya");
         this.setSize(new Dimension(400, 415));
         initializeComponents();
@@ -46,8 +61,12 @@ public class MainWindow extends JFrame {
         JMenuBar menubar = new JMenuBar();
         JMenu file = new JMenu("Game");
         menubar.add(file);
-        file.add(new JMenuItem("One Player"));
-        file.add(new JMenuItem("Two Players"));
+        JMenuItem onePlayer = new JMenuItem("One Player");
+        onePlayer.addActionListener(new OnePlayerController());
+        JMenuItem twoPlayers = new JMenuItem("Two Players");
+        twoPlayers.addActionListener(new TwoPlayersController());
+        file.add(onePlayer);
+        file.add(twoPlayers);
         this.setJMenuBar(menubar);
     }
     
