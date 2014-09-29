@@ -27,9 +27,9 @@ public class GamePanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.red);
-        g.drawLine(150, 50, 150, 350);
-        g.drawLine(250, 50, 250, 350);
-        g.drawLine(50, 150, 350, 150);
-        g.drawLine(50, 250, 350, 250);
+        g.drawLine(137, 35, 137, 360);
+        g.drawLine(261, 35, 261, 360);
+        g.drawLine(20, 135, 380, 135);
+        g.drawLine(20, 257, 380, 257);
     }
 }

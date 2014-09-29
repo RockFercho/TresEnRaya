@@ -6,8 +6,11 @@
 
 package game.view;
 
+import game.controller.ButtonController;
 import game.model.factory.Position;
 import game.model.factory.State;
+import java.awt.Color;
+import java.awt.Event;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -17,17 +20,26 @@ import javax.swing.JButton;
  */
 public class Cell extends JButton {
     
-    public Position position;
-    public State state;
+    private Position position;
+    private State state;
+    private ImageIcon icon;
+    
     
     public Cell(int xPosition, int yPosition) {
         super();
         this.position = new Position(xPosition, yPosition);
         this.state = State.FREE;
-        ImageIcon icon = new ImageIcon("resources/Empty.png");
-        this.setIcon(icon);
+        this.icon = new ImageIcon("resources/Empty.png");
+        this.setIcon(this.icon);
         this.setFocusPainted(false);
         this.setBorderPainted(false);
-        this.setContentAreaFilled(false);
+        this.setBackground(Color.white);
+        this.addActionListener(new ButtonController(this));
+    }
+    
+    public void updateIcon() {
+        this.icon = new ImageIcon("resources/Circle.png");
+        this.setIcon(this.icon);
+        this.updateUI();
     }
 }

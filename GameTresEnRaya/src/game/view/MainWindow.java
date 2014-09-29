@@ -6,10 +6,16 @@
 
 package game.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -19,13 +25,15 @@ public class MainWindow extends JFrame {
     
     private Cell[][] cells;
     private GamePanel gamePanel;
+    private JLabel label;
     
     public MainWindow() {
         super("Tres En Raya");
-        this.setSize(new Dimension(400, 400));
+        this.setSize(new Dimension(400, 415));
         initializeComponents();
         addComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -34,6 +42,13 @@ public class MainWindow extends JFrame {
         this.gamePanel = new GamePanel();
         this.cells = new Cell[3][3];
         createCells();
+        this.label = new JLabel("Holaaaaaaaaaaaaaaaaaaaa");
+        JMenuBar menubar = new JMenuBar();
+        JMenu file = new JMenu("Game");
+        menubar.add(file);
+        file.add(new JMenuItem("One Player"));
+        file.add(new JMenuItem("Two Players"));
+        this.setJMenuBar(menubar);
     }
     
     private void addComponents() {
@@ -45,6 +60,7 @@ public class MainWindow extends JFrame {
                 this.gamePanel.add(this.cells[i][j], c);
             }
         }
+        this.getContentPane().add(this.label, BorderLayout.SOUTH);
     }
     
     private void setValuesConstraint(int gridX, int gridY,
