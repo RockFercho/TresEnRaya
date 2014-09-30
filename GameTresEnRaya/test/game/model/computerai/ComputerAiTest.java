@@ -30,26 +30,28 @@ public class ComputerAiTest {
      */
     @Test
     public void testMovementFirstMove() {
-        assertEquals(SearchAddress.FREE, ai.movement(new Board(), State.CIRCLE));
+        assertEquals(SearchAddress.FREE, ai.movement(Board.getInstance(), State.CIRCLE));
     }
 
     @Test
     public void testComputerOnlyMovesATimeAtFirstMove() {
         State PLAYERSTATE = State.CIRCLE;
-        Board board = new Board();
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[1][1].setState(PLAYERSTATE);
         ai.movement(board, PLAYERSTATE);
         int currentNumberOfStates = calculateNumberOfStates(board.getBoxes());
         assertEquals(2, currentNumberOfStates);
+        Board.destroyInstance();
     }
 
     @Test
     public void testMovementSecondMove() {
-        Board board = new Board();
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[2][2].setState(State.CIRCLE);
         assertEquals(SearchAddress.FREE, ai.movement(board, State.CIRCLE));
+        Board.destroyInstance();
     }
 
     /**
@@ -60,7 +62,7 @@ public class ComputerAiTest {
      */
     @Test
     public void testMovementFinalFirstRowMove() {
-        Board board = new Board();
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[1][1].setState(State.CIRCLE);
         boxes[0][1].setState(State.CROSS);

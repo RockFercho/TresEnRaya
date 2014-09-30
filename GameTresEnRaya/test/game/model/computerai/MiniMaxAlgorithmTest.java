@@ -29,7 +29,8 @@ public class MiniMaxAlgorithmTest {
     @Test
     public void testMovement() {
         assertEquals(SearchAddress.FREE,
-                algorithm.movement(new Board(), State.CROSS, State.CIRCLE));
+                algorithm.movement(Board.getInstance(), State.CROSS, State.CIRCLE));
+        Board.destroyInstance();
     }
     
     /**
@@ -41,7 +42,7 @@ public class MiniMaxAlgorithmTest {
      */
     @Test
     public void testMin() {
-        Board board = new Board();
+        Board board = Board.getInstance();
         Box[][]boxes = board.getBoxes();
         boxes[1][1].setState(State.CROSS);
         boxes[0][2].setState(State.CROSS);
@@ -49,6 +50,7 @@ public class MiniMaxAlgorithmTest {
         boxes[2][1].setState(State.CIRCLE);
         boxes[2][2].setState(State.CIRCLE);
         assertEquals(1, algorithm.min(board, State.CROSS, State.CIRCLE));
+        Board.destroyInstance();
     }
 
     /**
@@ -60,7 +62,7 @@ public class MiniMaxAlgorithmTest {
      */
     @Test
     public void testMax() {
-        Board board = new Board();
+        Board board = Board.getInstance();
         Box[][]boxes = board.getBoxes();
         boxes[1][1].setState(State.CIRCLE);
         boxes[0][2].setState(State.CIRCLE);
@@ -68,7 +70,7 @@ public class MiniMaxAlgorithmTest {
         boxes[2][1].setState(State.CROSS);
         boxes[2][2].setState(State.CROSS);
         assertEquals(-1, algorithm.max(board, State.CROSS, State.CIRCLE));
-        
+        Board.destroyInstance();
     }
     
 }

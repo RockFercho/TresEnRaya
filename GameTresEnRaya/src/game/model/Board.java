@@ -165,4 +165,12 @@ public class Board {
         }
         return false;
     }
+    
+    /**
+     * Return the logic for testing purposes only.
+     * @return the logicGame
+     */
+    public LogicGame getLogic() {
+        return logic;
+    }
 }

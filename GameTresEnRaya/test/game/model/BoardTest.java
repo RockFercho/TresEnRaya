@@ -10,6 +10,7 @@ import game.model.factory.Position;
 import game.model.factory.State;
 import game.model.logic.SearchAddress;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
 /**
@@ -17,12 +18,6 @@ import org.junit.Test;
  * @author kevin
  */
 public class BoardTest {
-
-    private final Board board;
-
-    public BoardTest() {
-        board = new Board();
-    }
 
     /**
      * Test of personVsPerson method, of class Board.
@@ -43,7 +38,9 @@ public class BoardTest {
      */
     @Test
     public void testPersonVsMachine() {
+        Board board = Board.getInstance();
         assertEquals(SearchAddress.FREE, board.personVsMachine(new Position(2,2), State.CIRCLE));
+        Board.destroyInstance();
     }
     /**
      * Person = O
@@ -55,13 +52,16 @@ public class BoardTest {
      */
     @Test
     public void testPersonVsMachineFifthMove() {
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[0][0].setState(State.CIRCLE);
-        boxes[1][1].setState(State.CIRCLE);
         boxes[2][0].setState(State.CROSS);
+        board.getLogic().getAi().setTurn((byte)1);
+        boxes[1][1].setState(State.CIRCLE);
         boxes[2][2].setState(State.CROSS);
         assertEquals(SearchAddress.THIRDLINE, board.personVsMachine(new Position(1,2), State.CIRCLE));
         assertEquals(State.CROSS, board.getWinner());
+        Board.destroyInstance();
     }
     /**
      * [ ][X ][ ]
@@ -70,10 +70,12 @@ public class BoardTest {
      */
     @Test
     public void testPersonVsMachineThirthMove(){
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[1][1].setState(State.CIRCLE);
         boxes[2][0].setState(State.CROSS);
         assertEquals(SearchAddress.FREE, board.personVsMachine(new Position(2,1), State.CIRCLE));
+        Board.destroyInstance();
     }
 
     /**
@@ -81,16 +83,11 @@ public class BoardTest {
      */
     @Test
     public void testGetWiner() {
+        Board board = Board.getInstance();
         assertEquals(State.FREE, board.getWinner());
+        Board.destroyInstance();
     }
 
-//    /**
-//     * Test of isEmpty method, of class Board.
-//     */
-//    @Test
-//    public void testIsEmpty() {
-//        assertEquals(true, board.isEmpty());
-//    }
 
     /**
      * 
@@ -104,9 +101,11 @@ public class BoardTest {
      */
     @Test
     public void testPlayerHasPlayedOneTurn() {
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[2][2].setState(State.CIRCLE);
         assertEquals(true, board.PlayerHasPlayedOneTurn());
+        Board.destroyInstance();
     }
 
     /**
@@ -120,12 +119,13 @@ public class BoardTest {
      */
     @Test
     public void testGetBoxes() {
+        Board board = Board.getInstance();
         Box[][] boxes = board.getBoxes();
         boxes[0][0].setState(State.CROSS);
         boxes[0][1].setState(State.CIRCLE);
         boxes[1][1].setState(State.CROSS);
         boxes[2][2].setState(State.CIRCLE);
-        
+        assertNotNull(boxes);
     }
 
 }
