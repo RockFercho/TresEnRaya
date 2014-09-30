@@ -6,6 +6,7 @@
 
 package game.controller;
 
+import game.controller.communication.FactoryCommunication;
 import game.view.Cell;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,6 @@ public class ButtonController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.cell.updateIcon();
+        FactoryCommunication.getCommunicator().notifyMovement(cell.getPosition());
     }
 }

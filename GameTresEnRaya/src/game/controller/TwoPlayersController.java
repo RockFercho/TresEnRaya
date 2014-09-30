@@ -6,6 +6,7 @@
 
 package game.controller;
 
+import game.controller.communication.FactoryCommunication;
 import game.view.MainWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,8 @@ public class TwoPlayersController implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        FactoryCommunication.destroyCommunicator();
+        FactoryCommunication.createCommunication(1);
         MainWindow.destroyInstance();
         MainWindow.getInstance();
     }

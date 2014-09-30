@@ -8,6 +8,7 @@ package game.view;
 
 import game.controller.OnePlayerController;
 import game.controller.TwoPlayersController;
+import game.controller.communication.FactoryCommunication;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -57,7 +58,7 @@ public class MainWindow extends JFrame {
         this.gamePanel = new GamePanel();
         this.cells = new Cell[3][3];
         createCells();
-        this.label = new JLabel("Holaaaaaaaaaaaaaaaaaaaa");
+        this.label = new JLabel("PLAYER ONE");
         JMenuBar menubar = new JMenuBar();
         JMenu file = new JMenu("Game");
         menubar.add(file);
@@ -98,6 +99,15 @@ public class MainWindow extends JFrame {
                 this.cells[i][j] = new Cell(i, j);
             }
         }
+    }
+    
+    public Cell[][] getCells() {
+        return this.cells;
+    }
+    
+    public void setLabel(String label) {
+        this.label.setText(label);
+        this.label.updateUI();
     }
     
     public static void main(String[] args) {

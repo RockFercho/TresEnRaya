@@ -37,9 +37,30 @@ public class Cell extends JButton {
         this.addActionListener(new ButtonController(this));
     }
     
-    public void updateIcon() {
-        this.icon = new ImageIcon("resources/Circle.png");
+    private void updateIcon() {
+        switch (this.state) {
+            case CIRCLE: this.icon = new ImageIcon("resources/Circle.png"); break;
+            case CROSS: this.icon = new ImageIcon("resources/Cruz.png"); break;
+        }
         this.setIcon(this.icon);
         this.updateUI();
+    }
+    
+    public void setState(State state) {
+        this.state = state;
+        this.updateIcon();
+    }
+    
+    public void updateIconWinner() {
+        switch (this.state) {
+            case CIRCLE: this.icon = new ImageIcon("resources/CircleWin.png"); break;
+            case CROSS: this.icon = new ImageIcon("resources/CruzWin.png"); break;
+        }
+        this.setIcon(this.icon);
+        this.updateUI();
+    }
+    
+    public Position getPosition() {
+        return this.position;
     }
 }
