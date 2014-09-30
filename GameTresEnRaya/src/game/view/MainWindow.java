@@ -8,7 +8,6 @@ package game.view;
 
 import game.controller.OnePlayerController;
 import game.controller.TwoPlayersController;
-import game.controller.communication.FactoryCommunication;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -20,17 +19,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
- *
+ * Represent a Main window of the game.
+ * 
  * @author sergio Uriona
  */
 public class MainWindow extends JFrame {
     
     private static MainWindow main;
-    
     private Cell[][] cells;
     private GamePanel gamePanel;
     private JLabel label;
     
+    /**
+     * Return an instance of MainWindow.
+     * @return 
+     */
     public static MainWindow getInstance() {
         if (main == null) {
             return main = new MainWindow();
@@ -39,10 +42,16 @@ public class MainWindow extends JFrame {
         }
     }
     
+    /**
+     * Destroy an instance of mainwindow.
+     */
     public static void destroyInstance() {
         main = null;
     }
     
+    /**
+     * Initialize a new MainWindow.
+     */
     private MainWindow() {
         super("Tres En Raya");
         this.setSize(new Dimension(400, 415));
@@ -54,6 +63,9 @@ public class MainWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    /**
+     * Initialize all components of mainWindow.
+     */
     private void initializeComponents() {
         this.gamePanel = new GamePanel();
         this.cells = new Cell[3][3];
@@ -71,6 +83,9 @@ public class MainWindow extends JFrame {
         this.setJMenuBar(menubar);
     }
     
+    /**
+     * Add components to mainWindow.
+     */
     private void addComponents() {
         this.getContentPane().add(this.gamePanel);
         GridBagConstraints c = new GridBagConstraints();
@@ -83,6 +98,12 @@ public class MainWindow extends JFrame {
         this.getContentPane().add(this.label, BorderLayout.SOUTH);
     }
     
+    /**
+     * Set values of constraint.
+     * @param gridX
+     * @param gridY
+     * @param c 
+     */
     private void setValuesConstraint(int gridX, int gridY,
             GridBagConstraints c) {
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -93,6 +114,9 @@ public class MainWindow extends JFrame {
         c.gridheight = 1;
     }
     
+    /**
+     * Create a cell initials.
+     */
     private void createCells() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -101,10 +125,18 @@ public class MainWindow extends JFrame {
         }
     }
     
+    /**
+     * Return the cells of the game.
+     * @return 
+     */
     public Cell[][] getCells() {
         return this.cells;
     }
     
+    /**
+     * Set the label of the game.
+     * @param label 
+     */
     public void setLabel(String label) {
         this.label.setText(label);
         this.label.updateUI();

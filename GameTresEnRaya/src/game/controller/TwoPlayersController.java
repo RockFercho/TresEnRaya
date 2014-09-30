@@ -12,15 +12,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Select the type of game for playing between two players.
+ * 
  * @author Sergio Uriona
  */
 public class TwoPlayersController implements ActionListener {
 
+    /**
+     * Initialize a new TwoPlayersController.
+     */
     public TwoPlayersController() {
         super();
     }
     
+    /**
+     * { @inheritdoc }
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         FactoryCommunication.destroyCommunicator();

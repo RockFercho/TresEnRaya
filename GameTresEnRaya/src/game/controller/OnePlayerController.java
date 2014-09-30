@@ -12,15 +12,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Select the type of game for play with the computer.
+ * 
  * @author Sergio Uriona
  */
 public class OnePlayerController implements ActionListener {
 
+    /**
+     * Initialize a new OnePlayerController.
+     */
     public OnePlayerController() {
         super();
     }
     
+    /**
+     * { @inheritdoc }
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         FactoryCommunication.destroyCommunicator();

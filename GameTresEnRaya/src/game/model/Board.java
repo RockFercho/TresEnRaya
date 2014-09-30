@@ -30,10 +30,20 @@ public class Board {
      */
     private final LogicGame logic;
     
+    /**
+     * Contains the boxes of winner.
+     */
     private List<Box> boxesWinner;
 
+    /**
+     * Represent a board of game.
+     */
     private static Board currentBoard;
     
+    /**
+     * Returns the instance of board.
+     * @return 
+     */
     public static Board getInstance() {
         if (currentBoard == null) {
             return currentBoard = new Board();
@@ -42,6 +52,9 @@ public class Board {
         }
     }
     
+    /**
+     * Destroy the instance of board.
+     */
     public static void destroyInstance() {
         currentBoard = null;
     }
@@ -55,6 +68,10 @@ public class Board {
         this.boxesWinner = new ArrayList();
     }
     
+    /**
+     * Return the boxes of winner.
+     * @return 
+     */
     public List<Box> getBoxesWinner() {
         return this.boxesWinner;
     }

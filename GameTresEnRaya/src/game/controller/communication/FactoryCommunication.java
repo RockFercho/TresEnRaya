@@ -7,13 +7,21 @@
 package game.controller.communication;
 
 /**
- *
+ * Create an instance of communicator.
+ * 
  * @author Sergio Uriona
  */
 public class FactoryCommunication {
     
+    /**
+     * Represents the communicator of game.
+     */
     private static Communication communication = null;
     
+    /**
+     * Initialize a communicator.
+     * @param n 
+     */
     public static void createCommunication(int n) {
         switch (n) {
             case 1: communication = new PlayerCommunication(); break;
@@ -21,10 +29,17 @@ public class FactoryCommunication {
         }
     }
     
+    /**
+     * Returns an instance of communicator.
+     * @return 
+     */
     public static Communication getCommunicator() {
         return communication;
     }
     
+    /**
+     * Destroy the instance of communicator.
+     */
     public static void destroyCommunicator() {
         communication = null;
     }

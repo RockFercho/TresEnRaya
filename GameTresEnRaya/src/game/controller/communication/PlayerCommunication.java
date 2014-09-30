@@ -14,15 +14,23 @@ import game.view.Cell;
 import game.view.MainWindow;
 
 /**
+ * Communicate the view with the logic game.
  *
  * @author Sergio Uriona
  */
 public class PlayerCommunication extends Communication {
 
+    /**
+     * Initialize a new PlayerCommunication.
+     */
     public PlayerCommunication() {
         super();
     }
     
+    /**
+     * { @inheritdoc }
+     * @param position 
+     */
     @Override
     public void notifyMovement(Position position) {
         SearchAddress response = Board.getInstance().personVsPerson(position, currentState);
@@ -33,6 +41,9 @@ public class PlayerCommunication extends Communication {
         }
     }
     
+    /**
+     * { @inheritdoc }
+     */
     @Override
     public void getChanges() {
         Box[][] boxes = Board.getInstance().getBoxes();
@@ -45,6 +56,9 @@ public class PlayerCommunication extends Communication {
         this.setLabel();
     }
     
+    /**
+     * Set the text of label of MainWindow.
+     */
     private void setLabel() {
         switch (currentState) {
             case CIRCLE: MainWindow.getInstance().setLabel("PLAYER TWO"); break;
@@ -52,6 +66,9 @@ public class PlayerCommunication extends Communication {
         }
     }
     
+    /**
+     * { @inheritdoc }
+     */
     @Override
     public void updateWinners() {
         for (Box box: Board.getInstance().getBoxesWinner()) {

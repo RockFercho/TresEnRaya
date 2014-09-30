@@ -12,18 +12,26 @@ import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
-/**
- *
+/** 
+ * Contains the cells of the game.
+ * 
  * @author Sergio Uriona
  */
 public class GamePanel extends JPanel {
     
+    /**
+     * Initialize a new GamePanel.
+     */
     public GamePanel() {
         super();
         this.setSize(new Dimension(400, 400));
         this.setLayout(new GridBagLayout());
     }
     
+    /**
+     * { @inheritdoc }
+     * @param g 
+     */
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.red);
