@@ -11,6 +11,8 @@ import game.model.factory.Position;
 import game.model.factory.State;
 import game.model.logic.LogicGame;
 import game.model.logic.SearchAddress;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The class is responsible for handling the board.
@@ -27,13 +29,51 @@ public class Board {
      * Instance of the game logic.
      */
     private final LogicGame logic;
+    
+    /**
+     * Contains the boxes of winner.
+     */
+    private List<Box> boxesWinner;
 
+    /**
+     * Represent a board of game.
+     */
+    private static Board currentBoard;
+    
+    /**
+     * Returns the instance of board.
+     * @return 
+     */
+    public static Board getInstance() {
+        if (currentBoard == null) {
+            return currentBoard = new Board();
+        } else {
+            return currentBoard;
+        }
+    }
+    
+    /**
+     * Destroy the instance of board.
+     */
+    public static void destroyInstance() {
+        currentBoard = null;
+    }
+    
     /**
      * Constructor initializes global variables.
      */
-    public Board() {
+    private Board() {
         this.board = new FactoryBoard().getBoxes();
         this.logic = new LogicGame();
+        this.boxesWinner = new ArrayList();
+    }
+    
+    /**
+     * Return the boxes of winner.
+     * @return 
+     */
+    public List<Box> getBoxesWinner() {
+        return this.boxesWinner;
     }
 
     /**
@@ -56,8 +96,11 @@ public class Board {
      *          returns Free if there is no three in line.
      */
     public SearchAddress personVsMachine(Position position, State state){
-        this.logic.movement(board, position, state);
-        return this.logic.getAi().movement(this, state);
+        SearchAddress result = this.logic.movement(board, position, state);
+        if (result == SearchAddress.FREE) {
+            result = this.logic.getAi().movement(this, state);
+        }
+        return result;
     }
     
     /**

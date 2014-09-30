@@ -5,6 +5,7 @@
  */
 package game.model.logic;
 
+import game.model.Board;
 import game.model.factory.Box;
 import game.model.factory.State;
 
@@ -76,9 +77,15 @@ public class Browser {
      * @return value boolean.
      */
     private boolean searchByRow(Box[][] board, int i, State state) {
-        return (board[i][0].getState() == state && 
+        boolean result = (board[i][0].getState() == state && 
                 board[i][1].getState() == state &&
                 board[i][2].getState() == state);
+        if (result) {
+            for (int j = 0; j < 3; j++) {
+                Board.getInstance().getBoxesWinner().add(board[i][j]);
+            }
+        }
+        return result;
     }
 
     /**
@@ -89,9 +96,15 @@ public class Browser {
      * @return value boolean
      */
     private boolean searchByColumn(Box[][] board, int j, State state) {
-        return (board[0][j].getState() == state &&
+        boolean result = (board[0][j].getState() == state &&
                 board[1][j].getState() == state &&
-                board[0][j].getState() == state);
+                board[2][j].getState() == state);
+        if (result) {
+            for (int i = 0; i < 3; i++) {
+                Board.getInstance().getBoxesWinner().add(board[i][j]);
+            }
+        }
+        return result;
     }
 
     /**
@@ -101,9 +114,15 @@ public class Browser {
      * @return
      */
     private boolean mainDiagonal(Box[][] board, State state) {
-        return (board[0][0].getState() == state &&
+        boolean result = (board[0][0].getState() == state &&
                 board[1][1].getState() == state &&
                 board[2][2].getState() == state);
+        if (result) {
+            for (int i = 0; i < 3; i++) {
+                Board.getInstance().getBoxesWinner().add(board[i][i]);
+            }
+        }
+        return result;
     }
 
     /**
@@ -113,8 +132,14 @@ public class Browser {
      * @return value boolean
      */
     private boolean secundaryDiagonal(Box[][] board, State state) {
-        return (board[2][0].getState() == state &&
+        boolean result = (board[2][0].getState() == state &&
                 board[1][1].getState() == state &&
                 board[0][2].getState() == state);
+        if (result) {
+            Board.getInstance().getBoxesWinner().add(board[2][0]);
+            Board.getInstance().getBoxesWinner().add(board[1][1]);
+            Board.getInstance().getBoxesWinner().add(board[0][2]);
+        }
+        return result;
     }
 }
